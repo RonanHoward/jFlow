@@ -112,6 +112,10 @@ public class Model {
         return errors;
     }
 
+
+    public void fit(Dataset dataset) {
+        this.fit(dataset.train_data, dataset.train_labels);
+    }
     /**
      * Applies backpropagation and gradient descent to average error over one epoch
      * @param train_data
@@ -240,7 +244,7 @@ public class Model {
 
     public void printWeights() {
         for (int i = 0; i < this.layers.size(); i++){
-            System.out.println("WEIGHTS FOR LAYER "+i);
+            System.out.println("WEIGHTS FOR LAYER "+(i+1));
             Calc.log(this.layers.get(i).weights);
         }
     }

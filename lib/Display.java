@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 import jflow.Calc;
+import jflow.Dataset;
 import jflow.Model;
 
 public class Display extends JPanel {
@@ -122,6 +123,57 @@ public class Display extends JPanel {
         for ( int i = 0; i < epochs; i++) {
             model.fit(train_data, train_labels);
             TimeUnit.MILLISECONDS.sleep(msDelay);
+            frame.repaint();
+        }
+    }
+    /**
+     * Shows network training over time
+     * @param m
+     * @param p
+     * @param train_data
+     * @param train_labels
+     * @param epochs
+     * @throws InterruptedException
+     */
+    public static void main(Model m, HashSet<Point> p, Dataset d, int epochs, int msDelay) throws InterruptedException {
+        model = m;
+        points = p;
+
+        JFrame frame = new JFrame();
+        frame.getContentPane().add(new Display());
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(width, height);
+        frame.setVisible(true);
+
+        for ( int i = 0; i < epochs; i++) {
+            model.fit(d);
+            TimeUnit.MILLISECONDS.sleep(msDelay);
+            frame.repaint();
+        }
+    }
+    /**
+     * Shows network training over time
+     * @param m
+     * @param p
+     * @param train_data
+     * @param train_labels
+     * @param epochs
+     * @throws InterruptedException
+     */
+    public static void main(Model m, HashSet<Point> p, Dataset d, int epochs) throws InterruptedException {
+        model = m;
+        points = p;
+
+        JFrame frame = new JFrame();
+        frame.getContentPane().add(new Display());
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(width, height);
+        frame.setVisible(true);
+
+        for ( int i = 0; i < epochs; i++) {
+            model.fit(d);
             frame.repaint();
         }
     }
